@@ -1,7 +1,20 @@
+typedef enum ValueType {
+    STRING,
+    NUMBER,
+    JSON,
+    KYWRD,
+    ARRAY,
+} valuetype_e;
+
+typedef struct Value {
+    valuetype_e type;
+    void *val;
+} value_t;
+
 /* key-val pair */
 typedef struct Node {
     char *key;
-    void *val;
+    value_t *val;
     struct Node *next;
 } node_t;
 

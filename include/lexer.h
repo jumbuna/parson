@@ -1,4 +1,6 @@
-#include <_stdio.h>
+#ifndef _LEXER_H
+#define _LEXER_H
+
 #include <stdio.h>
 /*
  * Token types
@@ -20,7 +22,7 @@ typedef enum Token {
 #if defined (_LEXER_C)
     token getNextToken();
     void advance();
-    char buffer[];
+    char buffer[1024];
     FILE *Istream;
     char LastChar = ' ';
     int CurrentLine = 1;
@@ -32,3 +34,5 @@ typedef enum Token {
     extern char LastChar;
     extern int CurrentLine;
 #endif
+
+#endif /* _LEXER_H */

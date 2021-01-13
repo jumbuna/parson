@@ -1,4 +1,5 @@
 #include "../include/list.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 node_t *NodeCreate() {
@@ -34,7 +35,7 @@ void ListForEach(list_t *list, void (*fun) (char *key, void *val)) {
     if(list->length == 0) return;
     node_t *temp = list->head;
     while(temp != NULL) {
-        fun(temp->key, temp->val);
+        fun(temp->key, temp->val->val);
         temp = temp->next;
     }
 }

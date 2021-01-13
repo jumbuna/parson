@@ -14,11 +14,6 @@
  * every symbol
  */
 
-
-/**
- * Current line in the input stream 
- */
-
 /** 
  * Lexeme
  */
