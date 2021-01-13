@@ -18,15 +18,11 @@
 /**
  * Current line in the input stream 
  */
-static int CurrentLine = 1;
 
 /** 
  * Lexeme
  */
 char buffer[1024];
-
-/** Last char */
-static char LastChar = ' ';
 
 /**
  * Advance to next character
@@ -81,7 +77,7 @@ token getIdentifier() {
             advance();
         }
         buffer[i] = 0;
-        if( strcmp(buffer, "True") == 0 || strcmp(buffer, "False") == 0 || strcmp(buffer, "null") == 0) {
+        if( strcmp(buffer, "true") == 0 || strcmp(buffer, "false") == 0 || strcmp(buffer, "null") == 0) {
             return Tok_Bool;
         }
         printf("Try enclosing `%s` in \"\" marks\n", buffer);
@@ -98,7 +94,7 @@ token getIdentifier() {
 token getNextToken() {
     /* Skip whitespaces */
     while(isspace(LastChar)) {
-        LastChar = getc(Istream);
+        advance();
     }
     
     while(LastChar != EOF) {

@@ -6,6 +6,6 @@ configure_file(info.h.in "${CMAKE_CURRENT_SOURCE_DIR}/include/info.h" @ONLY)
 
 add_subdirectory(lib)
 
-add_executable(parson src/main.c src/lexer.c)
+add_executable(parson src/main.c src/lexer.c src/parser.c src/list.c)
 
 target_include_directories(parson PUBLIC include)

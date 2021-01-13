@@ -22,9 +22,13 @@ typedef enum Token {
     void advance();
     char buffer[];
     FILE *Istream;
+    char LastChar = ' ';
+    int CurrentLine = 1;
 #else
     extern token getNextToken();
     extern void advance();
     extern char buffer[];
     extern FILE *Istream;
+    extern char LastChar;
+    extern int CurrentLine;
 #endif
