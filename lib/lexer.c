@@ -4,7 +4,7 @@
 #include <string.h>
 
 #define _LEXER_C
-#include "../include/lexer.h"
+#include "lexer.h"
 #undef __LEXER_C
 
 /*

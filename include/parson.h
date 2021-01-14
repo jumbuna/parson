@@ -13,6 +13,6 @@ void *parsonGetByKey(struct Json *, char*);
 
 _Bool parsonContains(struct  Json *, char *);
 
-void parsonPrettify(struct Json *);
+void parsonPrettify(struct Json *, int);
 
 #endif /* _PARSON_H */

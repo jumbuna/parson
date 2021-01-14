@@ -1,10 +1,10 @@
-#include "../include/lexer.h"
+#include "lexer.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define _PARSER_C
-#include "../include/parser.h"
+#include "parser.h"
 #undef _PARSER_C
 
 
