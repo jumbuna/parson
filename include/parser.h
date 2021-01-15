@@ -1,16 +1,18 @@
 #ifndef _PARSER_H
 #define _PARSER_H
-#include "../include/list.h"
-#include "../include/lexer.h"
+#include "list.h"
+#include "lexer.h"
 
 typedef struct Json {
     list_t *values;
 } json_t;
 
 #ifdef _PARSER_C
-    json_t *jsonParse();
+    json_t *JsonParse();
+    void JsonFree(json_t *);
 #else
-    extern json_t *jsonParse();
+    extern json_t *JsonParse();
+    void JsonFree(json_t *);
 #endif
 
 #endif /* _PARSER_H */

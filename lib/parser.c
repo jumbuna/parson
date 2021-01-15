@@ -7,6 +7,7 @@
 #include "parser.h"
 #undef _PARSER_C
 
+static allocator_t *alloc = NULL;
 
 list_t *keyValPairs();
 void keyValPair(), *key(), *val(), *array();
@@ -14,7 +15,7 @@ void keyValPair(), *key(), *val(), *array();
 /**
  *
  */
-json_t *jsonParse() {
+json_t *JsonParse() {
     json_t *json = malloc(sizeof(json_t));
     if(getNextToken() == Tok_BraceOpen) {
         do {
@@ -31,7 +32,10 @@ json_t *jsonParse() {
 }
 
 list_t *keyValPairs() {
-    list_t *list = ListCreate();
+    if(alloc == NULL) {
+        alloc = AllocatorCreate(sizeof(struct Node), 256);
+    }
+    list_t *list = ListCreate(alloc);
     char *k;
     void *v;
     keyValPair(&k, &v);
@@ -87,7 +91,7 @@ void *val() {
         }
         case Tok_BraceOpen: {
             val->type = JSON;
-            val->val = jsonParse();
+            val->val = JsonParse();
             return val;
         }
         default: printf("Unexpefcted `%c` on line %d\n", LastChar, CurrentLine);exit(1);
@@ -95,7 +99,7 @@ void *val() {
 }
 
 void *array() {
-    list_t *l = ListCreate();
+    list_t *l = ListCreate(alloc);
     int i = 0;
     advance();
     while (1) {
@@ -109,4 +113,9 @@ void *array() {
     }
     advance();
     return l;
+}
+
+void JsonFree(json_t *json) {
+    ListDestroy(json->values);
+    free(json);
 }
