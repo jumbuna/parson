@@ -1,3 +1,5 @@
+#include "allocator.h"
+
 typedef enum ValueType {
     STRING,
     NUMBER,
@@ -21,16 +23,17 @@ typedef struct Node {
 typedef struct List {
     int length;
     node_t *head, *tail;
+    allocator_t *allocator;
 } list_t;
-
-node_t *NodeCreate();
 
 void NodeDestroy(node_t *);
 
-list_t *ListCreate();
+list_t *ListCreate(allocator_t *);
 
-// void ListInsertFront(list_t *, void *);
+void ListInsertFront(list_t *, void *);
 
 void ListInsertBack(list_t *, char *, void *);
 
 void ListForEach(list_t *, void (*) (char *, void *));
+
+void ListDestroy(list_t *);

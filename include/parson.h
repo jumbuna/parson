@@ -1,7 +1,7 @@
 #ifndef _PARSON_H
 #define _PARSON_H
 
-#include "../include/parser.h"
+#include "parser.h"
 
 /* API */
 

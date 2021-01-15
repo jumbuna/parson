@@ -2,27 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-node_t *NodeCreate() {
-    node_t *new = malloc(sizeof(node_t));
+list_t *ListCreate(allocator_t *alloc) {
+    list_t *new = calloc(1, sizeof(list_t));
+    new->allocator = alloc;
     return new;
 }
 
-void NodeDestroy(node_t *node) {
-    free(node);
-}
-
-list_t *ListCreate() {
-    return calloc(1, sizeof(list_t));
-
-}
-
-// void ListInsertFront(list_t *, void *);
-
 void ListInsertBack(list_t *list, char *key, void *val) {
     if(list->length == 0) {
-        list->tail = list->head = NodeCreate();
+        list->tail = list->head = AllocatorAllocate(list->allocator);
     } else {
-        list->tail->next = NodeCreate();
+        list->tail->next = AllocatorAllocate(list->allocator);
         list->tail = list->tail->next;
     }
     list->tail->next = NULL;
@@ -38,4 +28,9 @@ void ListForEach(list_t *list, void (*fun) (char *key, void *val)) {
         fun(temp->key, temp->val->val);
         temp = temp->next;
     }
+}
+
+void ListDestroy(list_t *list) {
+    AllocatorDestroy(list->allocator);
+    free(list);
 }

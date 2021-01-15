@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "parser.h"
 #include "parson.h"
 
 struct Json *parsonParse(char *filename) {
@@ -10,11 +11,11 @@ struct Json *parsonParse(char *filename) {
         printf("Cannot open file\n");
         exit(1);
     }
-    return jsonParse();
+    return JsonParse();
 }
 
 void parsonFree(struct Json *json) {
-
+    JsonFree(json);
 }
 
 void *parsonGetByKey(struct Json *json, char *key) {
